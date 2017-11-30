@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sidebar Map</title>
+
+
+<link rel="stylesheet" href="leaflet/leaflet.css">
+<link rel="stylesheet" href="leaflet-sidebar-master/src/L.Control.Sidebar.css">
+
+<style>
+body {
+    padding: 0;
+    margin: 0;
+}
+html, body, #map {
+    height: 100%;
+}
+.text {
+    /*font-style: italic;*/
+    color: black;
+}
+
+</style>
+</head>
+
+
+<body>
+<div id="sidebar-left">
+    <h1>Work Experience - David Weld</h1>
+    <p> Click compass markers on map for brief GIS position details</p>
+    <hr>
+    <p class="text"><h2>GIS Technician</h2><b>Apple Inc. via Apex Systems - Austin, TX</b><br>August 2016 - November 2017
+        <ul>
+            <li>Worked on a proprietary desktop and web-based GIS platform daily</li>
+            <li>Member of Editor, Approver, Verifier, and AOI/POI teams</li>
+            <li>Performed vector edits for addresses and streets</li>
+            <li>Digitization of AOI/POI boundaries</li>
+            <li>Productivity award winner for February 2017</li>
+        </ul>
+    </p>
+    <hr>
+
+    <p class="text"><h2>Remote Sensing Analyst</h2><b>Intermap Technologies - Englewood, CO</b><br>July 2013 - August 2016
+        <ul>
+            <li>Member of Data Production team and Software Development team</li>
+            <li>LiDAR imagery analysis and mosaic creation</li>
+            <li>Ecological species research and shapefile creation for oil and gas pipeline reference</li>
+            <li>World Flood Plain imagery production</li>
+            <li>Manual testing on UI/UX of proprietary web-based GIS platform</li>
+        </ul>
+    </p>
+    <hr>
+
+    <p class="text"><h2>Proshop Cashier/Starter</h2><b>Broken Tee Golf Course - Englewood, CO</b><br>August 2012 - August 2016
+        <ul>
+            <li>Full time for the first year and part time while working at Intermap Technologies</li>
+        </ul>
+    </p>
+    <hr>
+
+    <p class="text"><h2>GIS Technician Assistant</h2><b>Iowa Geological & Water Survey - Iowa City, IA</b><br>August 2010 - July 2012
+        <ul>
+            <li>Orthorectify historic aerial imagery for the state of Iowa</li>
+                <ul>
+                    <li><a href="https://programs.iowadnr.gov/maps//aerials/">Historic Aerial Photo Project</a></li>
+                    <li><a href="https://programs.iowadnr.gov/nrgislibx/">NRGIS Library</a></li>
+                </ul>
+            <li>Edit aerial photography for transmission line coverage using LiDAR data</li>
+            <li>Geocode aerial photography of Iowa for building types</li>
+        </ul>
+    </p>
+    <hr>
+
+    <p class="text"><b>Additional Employment</b>
+        <ul>
+            <li>Hampton Inn - Maintenance</li>
+            <li>Godfather's Pizza - Counter</li>
+            <li>Pheasant Ridge Golf Course - Outside Services</li>
+        </ul>
+    </p>
+    <hr>
+
+    <p class="text"><h3>Relevant Links</h3>
+        <ul>
+            <li><a href="https://github.com/dweld13">My GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/david-weld-0028a549/">LinkedIn Profile</a></li>
+        </ul>
+    </p>
+</div>
+
+
+
+<div id="map"></div>
+
+<script src="leaflet/leaflet.js"></script>
+<script src="leaflet-sidebar-master/src/L.Control.Sidebar.js"></script>
+
+
+<script>
+var map = L.map('map').setView([39.5, -98.3], 5);
+
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZHdlbGQxMyIsImEiOiJjamFsYjN5MXQyc3d5MnFvaWFoOHA1dW90In0.js9GyaCKa9Icy2tSIsScfg', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox.streets',
+    accessToken: 'pk.eyJ1IjoiZHdlbGQxMyIsImEiOiJjamFsYjN5MXQyc3d5MnFvaWFoOHA1dW90In0.js9GyaCKa9Icy2tSIsScfg'
+}).addTo(map);
+
+//sidebar
+var leftSidebar = L.control.sidebar('sidebar-left', {
+    closeButton: true,
+    position: 'left'
+});
+map.addControl(leftSidebar);
+
+setTimeout(function () {
+    leftSidebar.toggle();
+}, 500);
+
+
+//compass icon image for marker
+var myIcon = L.icon({
+    iconUrl: 'compass4.png',
+    iconSize: [55, 55]
+});
+L.marker([30.43285, -97.73775], {icon: myIcon}).addTo(map).bindPopup("<h2>GIS Technician</h2><b>Apple Inc. via Apex Systems</b><br><em>August 2016 - November 2017</em>");
+
+
+var myIcon = L.icon({
+    iconUrl: 'compass4.png',
+    iconSize: [55, 55]
+});
+L.marker([39.56513, -104.86954], {icon: myIcon}).addTo(map).bindPopup("<h2>Remote Sensing Analyst</h2><b>Intermap Technologies</b><br><em>July 2013 - August 2016</em>");
+
+var myIcon = L.icon({
+    iconUrl: 'compass4.png',
+    iconSize: [55, 55]
+});
+L.marker([41.66341, -91.53644], {icon: myIcon}).addTo(map).bindPopup("<h2>GIS Technician Assistant</h2><b>Iowa Geological & Water Survey</b><br><em>August 2010 - July 2012</em>");
+
+
+var marker = L.marker([39.64323, -105.01258]).addTo(map).bindPopup("<h2>Pro Shop Cashier/Starter</h2><b>Broken Tee Golf Course</b><br><em>August 2012 - August 2016</em>");
+
+
+var marker = L.marker([41.68805, -91.56544]).addTo(map).bindPopup("<h2>Maintenance</h2><b>Hampton Inn</b><br><em>June 2009 - June 2010</em>");
+
+var marker = L.marker([42.53231, -92.48761]).addTo(map).bindPopup("<h2>Counter</h2><b>Godfather's Pizza</b><br><em>January 2007 - August 2008</em>");
+
+var marker = L.marker([42.53801, -92.46528]).addTo(map).bindPopup("<h2>Outside Services</h2><b>Pheasant Ridge Golf Course</b><br><em>April 2004 - August 2006</em>");
+
+
+
+L.DomEvent.on(leftSidebar.getCloseButton(), 'click', function () {
+            console.log('close button clicked.');
+        });
+
+
+
+
+</script>
+
+</body>
+</html>
